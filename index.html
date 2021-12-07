@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="script.js"></script>
+    <style>
+        .container {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 20px auto;
+        }
+        #puzzle-master {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #puzzle {
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .answer-container {
+            padding-left: 3px;
+            display: block;
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+        }
+        .answer-img {
+            display: inline;
+            width: 145px;
+            height: 145px;
+        }
+    </style>
 </head>
 <body>
-	<div id="container">
-        <canvas id="puzzleMaster" width="300" height="300"></canvas>
-        <canvas id="puzzle" width="300" height="300"></canvas>
+	<div class="container">
+        <!-- 画像の元データをCanvas側で持っておく -->
+        <canvas id="puzzle-master" width="300px" height="300px"></canvas>
+        <!-- 画像の元データから9分割したピースをそれぞれ配置する -->
+        <!-- こちらが実際のパズルとして機能する -->
+        <canvas id="puzzle" width="300px" height="300px"></canvas>
+    </div>
+    <!-- 元画像（答え合わせ用） -->
+    <div class="answer-container">
+        <img id="easy" class="answer-img" src="easy.jpg"/>
+        <img id="hard" class="answer-img" src="hard.png"/>
     </div>
 </body>
 </html>
