@@ -44,6 +44,10 @@ class Puzzle {
 
   // タッチした位置をピース内のindexに変換し、ピースの移動が可能であれば移動する
   select(e) {
+    if (this.isFinish) {
+      return;
+    }
+
     const rect = e.target.getBoundingClientRect();
     const tx = e.clientX - rect.left;
     const ty = e.clientY - rect.top;
@@ -84,6 +88,10 @@ class Puzzle {
 
   // ピースを動かす
   movePiece(isShuffle) {
+    if (this.isFinish) {
+      return;
+    }
+
     // ピース自体の配列インデックスを返す
     const pieceIndex = (index) => {
       for (var i = 0; i < this.pieceData.length; i++) {
