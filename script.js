@@ -228,7 +228,11 @@ class Puzzle {
   run(src) {
     this.reset();
 
-    this.puzzle.addEventListener("mousedown", this.select.bind(this), false);
+    this.puzzle.addEventListener(
+      touchEventName(),
+      this.select.bind(this),
+      false
+    );
 
     // 画像を読み込んでからピースを作成してシャッフルしてスタート
     const img = new Image();
@@ -247,7 +251,7 @@ window.onload = () => {
 
   const easy = document.getElementById("easy");
   easy.addEventListener(
-    "mousedown",
+    touchEventName(),
     (e) => {
       pz.run(easy.getAttribute("src"));
     },
@@ -256,10 +260,16 @@ window.onload = () => {
 
   const hard = document.getElementById("hard");
   hard.addEventListener(
-    "mousedown",
+    touchEventName(),
     (e) => {
       pz.run(hard.getAttribute("src"));
     },
     false
   );
+};
+
+const touchEventName = () => {
+  return typeof window.ontouchstart === "undefined"
+    ? "mousedown"
+    : "touchstart";
 };
