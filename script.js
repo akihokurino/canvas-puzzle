@@ -40,6 +40,12 @@ class Puzzle {
       blank: null,
       select: null,
     };
+
+    this.puzzle.addEventListener(
+      touchEventName(),
+      this.select.bind(this),
+      false
+    );
   }
 
   // タッチした位置をピース内のindexに変換し、ピースの移動が可能であれば移動する
@@ -49,8 +55,8 @@ class Puzzle {
     }
 
     const rect = e.target.getBoundingClientRect();
-    const tx = e.clientX - rect.left;
-    const ty = e.clientY - rect.top;
+    const tx = touchEventX(e) - rect.left;
+    const ty = touchEventY(e) - rect.top;
     // x = 0, 1, 2
     const x = Math.floor(tx / pieceWidth);
     // y = 0, 1, 2
@@ -228,12 +234,6 @@ class Puzzle {
   run(src) {
     this.reset();
 
-    this.puzzle.addEventListener(
-      touchEventName(),
-      this.select.bind(this),
-      false
-    );
-
     // 画像を読み込んでからピースを作成してシャッフルしてスタート
     const img = new Image();
     img.src = src;
@@ -272,4 +272,16 @@ const touchEventName = () => {
   return typeof window.ontouchstart === "undefined"
     ? "mousedown"
     : "touchstart";
+};
+
+const touchEventX = (e) => {
+  return typeof window.ontouchstart === "undefined"
+    ? e.clientX
+    : e.touches[0].clientX;
+};
+
+const touchEventY = (e) => {
+  return typeof window.ontouchstart === "undefined"
+    ? e.clientY
+    : e.touches[0].clientY;
 };
