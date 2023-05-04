@@ -1,4 +1,4 @@
-## Specs
+## Used, Dependency
 
 - javascript
 - canvas
